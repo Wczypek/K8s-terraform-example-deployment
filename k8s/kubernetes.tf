@@ -76,7 +76,7 @@ resource "kubernetes_deployment" "hello" {
             }
             requests = {
               cpu    = "250m"
-              memory = "50Mi"
+              memory = "256Mi"
             }
           }
         }
@@ -91,7 +91,7 @@ resource "kubernetes_service" "hello" {
   }
   spec {
     selector = {
-      App = kubernetes_deployment.hello.spec.0.template.0.metadata[0].labels.App
+      App = "ScalablehelloExample"
     }
     port {
       port        = 8080

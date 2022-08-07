@@ -3,7 +3,7 @@
 
 ## About
 
-The project allows the deployment of a K8s cluster in GCP. In addition, the option to deploy a sample application serving the http API has been added.
+The project allows the deployment of a K8s cluster in GCP. In addition, the option to deploy a sample application serving the http API has been added. The main objective was to write an automation using Terraform.
 
 ## Prerequisites
 To run this project you need:
@@ -14,7 +14,7 @@ To run this project you need:
 ## Infrastructure
 
 ### Description
-
+The files in the 'infrastructure/' path are used to expose the infrastructure to the cloud. This includes VPC, subnet and GKE cluster. The number of nodes in the node pool were limited to be exposed within one zone in the region which was declared in the variables.
 ### Usage
 Login to your Google account and select the project you want to work in.
 ```commandline
@@ -32,6 +32,10 @@ $ terraform init
 Start provisioning VPC, subnet and GKE
 ```commandline
 $ terraform apply
+```
+To access `kubectl`
+```
+$ gcloud container clusters get-credentials $(terraform output -raw kubernetes_cluster_name) --zone $(terraform output -raw zone)
 ```
 
 ## App deployment
